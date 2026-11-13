@@ -32,6 +32,7 @@ This repository contains the backend of JobGlow, which serves the [frontend](htt
 | GET | `/` | Check server status | Public |
 | GET | `/jobs` | Retrieve all jobs | Public |
 | POST | `/jobs` | Create a new job posting | Public |
+| DELETE | `/jobs/:id` | Delete a job already posted | Public |
 
 ## 📦 Getting Started
 
