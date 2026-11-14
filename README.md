@@ -35,14 +35,15 @@ This repository contains the backend of JobGlow, which serves the
 
 **Base URL:** `https://jobglow-server.vercel.app`
 
-| Method   | Endpoint    | Description                  | Access |
-| -------- | ----------- | ---------------------------- | ------ |
-| `GET`    | `/`         | Check server status          | Public |
-| `GET`    | `/jobs`     | List jobs (with filtering)   | Public |
-| `POST`   | `/jobs`     | Create a new job post        | Public |
-| `GET` | `/jobs/:id` | Retrieve a job post            | Public |
-| `DELETE` | `/jobs/:id` | Delete a job post            | Public |
-| `POST` | `/applications` | Apply to a job             | Public |
+| Method   | Endpoint         | Description                                  | Access |
+| -------- | ---------------- | -------------------------------------------- | ------ |
+| `GET`    | `/`              | Check server status                          | Public |
+| `GET`    | `/jobs`          | List jobs (with filtering)                   | Public |
+| `POST`   | `/jobs`          | Create a new job post                        | Public |
+| `GET`    | `/jobs/:id`      | Retrieve a job post                          | Public |
+| `DELETE` | `/jobs/:id`      | Delete a job post                            | Public |
+| `GET`    | `/applications`  | List applications (with applicant ID filtering) | Public |
+| `POST`   | `/applications`  | Apply to a job                               | Public |
 
 
 > **Note:** Routes are currently public. Authentication and role checks are on
