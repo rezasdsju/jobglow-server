@@ -40,7 +40,9 @@ This repository contains the backend of JobGlow, which serves the
 | `GET`    | `/`         | Check server status          | Public |
 | `GET`    | `/jobs`     | List jobs (with filtering)   | Public |
 | `POST`   | `/jobs`     | Create a new job post        | Public |
+| `GET` | `/jobs/:id` | Retrieve a job post            | Public |
 | `DELETE` | `/jobs/:id` | Delete a job post            | Public |
+
 
 > **Note:** Routes are currently public. Authentication and role checks are on
 > the roadmap.
