@@ -29,6 +29,7 @@ const mongoConnection = await connectToMongoDB()
 const database = mongoConnection.db("jobglow");
 const users = database.collection('user')
 const jobs = database.collection('jobs')
+const applications = database.collection('applications')
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
@@ -85,6 +86,15 @@ app.delete('/jobs/:id', async (req, res) => {
         _id: new ObjectId(id)
     }
     const result = await jobs.deleteOne(query)
+    res.send(result)
+})
+
+
+
+// Applications related APIs
+app.post('/applications', async(req,res)=>{
+    const application = req.body
+    const result = await applications.insertOne(application)
     res.send(result)
 })
 app.listen(port, () => {
