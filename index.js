@@ -40,18 +40,39 @@ app.get('/', (req, res) => {
 // })
 
 // Jobs related APIs
-app.get('/jobs', async(req,res)=>{
-    const cursor = jobs.find({})
-    const result = await cursor.toArray()
+app.get('/jobs', async (req, res) => {
+    const query = {}
+    console.log('query: ', req.query)
+
+    if (req.query.jobType) {
+        query.jobType = req.query.jobType
+    }
+
+    if (req.query.isRemote) {
+        query.isRemote = req.query.isRemote === 'true'
+    }
+    if (req.query.category){
+        query.category = req.query.category
+    }
+    if (req.query.search) {
+        query.$or = [
+            { title: { $regex: req.query.search, $options: 'i' } },
+            { company: { $regex: req.query.search, $options: 'i' } },
+            { responsibilities: { $regex: req.query.search, $options: 'i' } },
+            { qualifications: { $regex: req.query.search, $options: 'i' } }
+        ]
+    }
+
+    const result = await jobs.find(query).toArray()
     res.send(result)
 })
-app.post('/jobs', async(req,res)=>{
+app.post('/jobs', async (req, res) => {
     const job = req.body
     const result = await jobs.insertOne(job)
     res.send(result)
 })
 
-app.delete('/jobs/:id', async(req,res)=>{
+app.delete('/jobs/:id', async (req, res) => {
     const id = req.params.id
     const query = {
         _id: new ObjectId(id)
