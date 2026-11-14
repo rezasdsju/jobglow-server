@@ -92,6 +92,15 @@ app.delete('/jobs/:id', async (req, res) => {
 
 
 // Applications related APIs
+app.get('/applications', async(req,res)=>{
+    const query = {}
+    if (req.query.applicantId){
+        query.userId = req.query.applicantId
+    }
+    const cursor = applications.find(query)
+    const result = await cursor.toArray()
+    res.send(result)
+})
 app.post('/applications', async(req,res)=>{
     const application = req.body
     const result = await applications.insertOne(application)
