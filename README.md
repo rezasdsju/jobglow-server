@@ -42,6 +42,7 @@ This repository contains the backend of JobGlow, which serves the
 | `POST`   | `/jobs`     | Create a new job post        | Public |
 | `GET` | `/jobs/:id` | Retrieve a job post            | Public |
 | `DELETE` | `/jobs/:id` | Delete a job post            | Public |
+| `POST` | `/applications` | Apply to a job             | Public |
 
 
 > **Note:** Routes are currently public. Authentication and role checks are on
