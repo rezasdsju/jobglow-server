@@ -43,6 +43,7 @@ This repository contains the backend of JobGlow, which serves the
 | `GET`    | `/jobs/:id`      | Retrieve a job post                          | Public |
 | `DELETE` | `/jobs/:id`      | Delete a job post                            | Public |
 | `GET`    | `/applications`  | List applications (with applicant ID filtering) | Public |
+| `GET`    | `/applications/count`  | Count applications (with applicant ID filtering) | Public |
 | `POST`   | `/applications`  | Apply to a job                               | Public |
 
 
