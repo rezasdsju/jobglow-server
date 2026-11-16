@@ -109,6 +109,9 @@ app.get('/applications', async (req, res) => {
     if (req.query.applicantId) {
         query.userId = req.query.applicantId
     }
+    if (req.query.jobId) {
+        query.jobId = req.query.jobId
+    }
     const cursor = applications.find(query)
     const result = await cursor.toArray()
     res.send(result)
