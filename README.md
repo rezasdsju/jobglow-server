@@ -31,22 +31,24 @@ This repository contains the backend of JobGlow, which serves the
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [nodemon](https://www.npmjs.com/package/nodemon) for local development
 
+
+
 ## 🔌 API Endpoints
 
 **Base URL:** `https://jobglow-server.vercel.app`
 
-| Method   | Endpoint                    | Description                                      | Access |
-| -------- | --------------------------- | ------------------------------------------------ | ------ |
-| `GET`    | `/`                         | Check server status                              | Public |
-| `GET`    | `/jobs`                     | List jobs (with filtering)                       | Public |
-| `POST`   | `/jobs`                     | Create a new job post                            | Public |
-| `GET`    | `/jobs/:id`                 | Retrieve a job post                              | Public |
-| `DELETE` | `/jobs/:id`                 | Delete a job post                                | Public |
-| `GET`    | `/applications`             | List applications (with applicant ID filtering)  | Public |
-| `GET`    | `/applications/count`       | Count applications (with applicant ID filtering) | Public |
-| `POST`   | `/applications`             | Apply to a job                                   | Public |
+| Method   | Endpoint                    | Description                                           | Access |
+| -------- | --------------------------- | ----------------------------------------------------- | ------ |
+| `GET`    | `/`                         | Check server status                                   | Public |
+| `GET`    | `/jobs`                     | List jobs (with filtering)                            | Public |
+| `POST`   | `/jobs`                     | Create a new job post                                 | Public |
+| `GET`    | `/jobs/:id`                 | Retrieve a job post                                   | Public |
+| `DELETE` | `/jobs/:id`                 | Delete a job post                                     | Public |
+| `GET`    | `/applications`             | List applications (with applicant ID filtering)       | Public |
+| `GET`    | `/applications/count`       | Count applications (with applicant ID filtering)      | Public |
+| `POST`   | `/applications`             | Apply to a job                                        | Public |
+| `GET`    | `/users/:id/premium`        | Check if a user has a premium plan                    | Public |
 | `POST`   | `/payments/checkout-verify` | Verify a Stripe checkout session and activate premium | Public |
-
 
 > **Note:** Routes are currently public. Authentication and role checks are on
 > the roadmap.
