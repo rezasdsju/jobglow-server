@@ -48,6 +48,8 @@ This repository contains the backend of JobGlow, which serves the
 | `GET`    | `/applications/count`       | Count applications (with applicant ID filtering)       | Public |
 | `POST`   | `/applications`             | Apply to a job                                         | Public |
 | `PATCH`  | `/applications/:id`         | Update an application's workflow status                | Public |
+| `GET`    | `/users`                    | List all users                                         | Public |
+| `PATCH`  | `/users/:id/role`           | Update a user's platform role                          | Public |
 | `GET`    | `/users/:id/premium`        | Check if a user has a premium plan                     | Public |
 | `POST`   | `/payments/checkout-verify` | Verify a Stripe checkout session and activate premium  | Public |
 

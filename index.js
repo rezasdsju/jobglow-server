@@ -36,12 +36,49 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// app.get('/users', async(req,res)=>{
-//     const cursor = users.find({})
-//     const result = await cursor.toArray()
-//     res.send(result)
-// })
+app.get('/users', async(req,res)=>{
+    const cursor = users.find({})
+    const result = await cursor.toArray()
+    res.send(result)
+})
+app.patch('/users/:id/role', async(req,res)=>{
+    const { id } = req.params
+    const { role } = req.body ?? {}
 
+    if (!['seeker', 'recruiter', 'admin'].includes(role)) {
+        return res.status(400).send({ message: 'Invalid role.' })
+    }
+
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send({ message: 'Invalid user id.' })
+    }
+
+    const user = await users.findOne(
+        { _id: new ObjectId(id) },
+        { projection: { role: 1 } }
+    )
+
+    if (!user) {
+        return res.status(404).send({ message: 'User not found.' })
+    }
+
+    // Leave updatedAt alone when the role already matches so modifiedCount
+    // still tells the client whether anything actually changed.
+    if (user.role === role) {
+        return res.send({
+            acknowledged: true,
+            modifiedCount: 0,
+            matchedCount: 1,
+        })
+    }
+
+    const result = await users.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { role, updatedAt: new Date() } }
+    )
+
+    res.send(result)
+})
 app.get('/users/:id/premium', async (req, res) => {
     const id = req.params.id
     const query = { _id: new ObjectId(id) }
