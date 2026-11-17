@@ -116,6 +116,7 @@ app.get('/applications', async (req, res) => {
     const result = await cursor.toArray()
     res.send(result)
 })
+
 app.get('/applications/count', async (req, res) => {
     const query = {}
     if (req.query.applicantId) {
@@ -124,12 +125,48 @@ app.get('/applications/count', async (req, res) => {
     const result = await applications.countDocuments(query)
     res.send({ count: result })
 })
+
 app.post('/applications', async (req, res) => {
     const application = req.body
     const result = await applications.insertOne(application)
     res.send(result)
 })
 
+const APPLICATION_STATUSES = [
+    'applied',
+    'review',
+    'shortlisted',
+    'interview',
+    'offered',
+    'rejected',
+    'withdrawn',
+]
+
+// Update the workflow status of one application.
+app.patch('/applications/:id', async (req, res) => {
+    const { id } = req.params
+    const { status } = req.body ?? {}
+
+    if (!APPLICATION_STATUSES.includes(status)) {
+        return res.status(400).send({
+            message: `status must be one of: ${APPLICATION_STATUSES.join(', ')}`,
+        })
+    }
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send({ message: 'Invalid application id' })
+    }
+
+    const result = await applications.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { status, updatedAt: new Date().toISOString() } }
+    )
+
+    if (result.matchedCount === 0) {
+        return res.status(404).send({ message: 'Application not found' })
+    }
+
+    res.send(result)
+})
 // Payments related APIs
 app.post('/payments/checkout-verify', async (req, res) => {
     const { sessionId } = req.body
